@@ -1,0 +1,8 @@
+{"data_matrix": "E:/PPS/TrainDatas/208/glmST/208_crimeData_20150401_20160601_glmST.csv",
+ "pd_id": 208,
+ "start_date": 20160602,
+ "end_date": 20160603,
+ "combine": "FALSE",
+ "burnin": 700,
+ "samples":800
+}

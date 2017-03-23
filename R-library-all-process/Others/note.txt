@@ -1,0 +1,7 @@
+数据格式：Matrix系列 
+    -> 存储：bigmemory/ff等
+        -> 计算：hive、ddR等
+            -> 框架：SparkR
+            
+        
+        

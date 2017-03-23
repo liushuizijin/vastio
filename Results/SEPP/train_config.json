@@ -1,0 +1,12 @@
+{"data_matrix": "E:/PPS/TrainDatas/SEPP_DATA/30_for_train_temp.csv",
+ "pd_id": 30,
+ "start_date": 20150101,
+ "end_date": 20161001,
+ "center": "FALSE",
+ "dist_range": 1,
+ "date_range": 120,
+ "nu_counts": 100,
+ "mu_counts": 15,
+ "g_counts": 15,
+ "iters": 50
+}

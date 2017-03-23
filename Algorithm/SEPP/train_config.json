@@ -1,0 +1,12 @@
+{"data_matrix": "E:/PPS/TrainDatas/208/SEPP/208_crimeData_20150401_20160601_SEPP.csv",
+ "pd_id": 208,
+ "start_date": 20150401,
+ "end_date": 20160401,
+ "center": "TRUE",
+ "dist_range": 1,
+ "date_range": 150,
+ "nu_counts": 100,
+ "mu_counts": 15,
+ "g_counts": 15,
+ "iters": 50
+}

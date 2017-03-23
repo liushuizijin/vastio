@@ -1,0 +1,10 @@
+{
+  "pd_id" : 208,
+  "data_in_path" : "E:/PPS/TrainDatas/TSTAT_DATA/208_20150315_20161212.csv",
+  "model_path" : "",
+  "start_date" : 20151201,
+  "end_date" : 20161001,
+  "date_range" : 120,
+  "top_n" : 10,
+  "data_out_path" : "E:/WorkSpace/Eclipse/PPSModels/Results/OptRank"
+}

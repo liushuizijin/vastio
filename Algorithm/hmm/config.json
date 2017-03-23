@@ -1,0 +1,7 @@
+{"data_matrix": "E:/PPS/TrainDatas/208/tstat/208_crimeData_20141003_20160601_tstat.csv",
+ "pd_id": 208,
+ "start_date": 20160401,
+ "end_date": 20160601,
+ "hide_range": 200,
+ "observe_range": 180
+}

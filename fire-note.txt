@@ -1,0 +1,5 @@
+Fire:::model
+
+fire_risk：火灾风险预测模型
+fire_degree：火灾大小预测模型
+enterprise_credit：单位火灾风险预测模型

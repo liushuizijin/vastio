@@ -1,0 +1,8 @@
+{
+  "file_train":"E:/WorkSpace/PyCharm/Fire/fire_risk/9_20151001_trans_new.csv",
+  "file_predict":"E:/WorkSpace/PyCharm/Fire/fire_risk/9_20151001_trans_new.csv",
+  "model":"E:/WorkSpace/PyCharm/Fire/fire_risk",
+  "deadline":20151001,
+  "output":"E:/WorkSpace/PyCharm/Fire/fire_risk",
+  "push":0.05
+}

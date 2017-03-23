@@ -1,0 +1,7 @@
+
+data frame 数据文件输出，输出的是常规的文件，如csv、txt、xls等
+RData R的存储环境保存，保存的是R的数据对象
+.R R的脚本输出和加载，cat函数、source函数
+
+文件操作【百度，R文件夹（/文件）操作（/管理）】
+http://blog.fens.me/r-file-folder/

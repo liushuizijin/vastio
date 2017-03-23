@@ -1,0 +1,170 @@
+PPS:::model
+
+tstat：基于时序推移的统计记忆模型 
+hmm：基于初始状态修正的隐马尔科夫模型 
+glmST：基于时空数据的广义线性混合模型 
+SEPP：自激励点过程模型R语言实现
+
+输入需求
+--------------------------------------------------------------------------------------------------------------
+数据列要求：
+
+tstat 
+训练+预测输入数据：【日期，格子，{该班次该格子案件数，该班次外层格子案件数}*班次数（列追加的形式）】
+    文件名【320206_crimeData_20140101_20160601_tstat.csv】
+    
+hmm   
+训练+预测输入数据：【同tstat】
+    文件名【320206_crimeData_20140101_20160601_tstat.csv】
+
+glmST 
+训练+预测输入数据：【日期，格子，该班次该格子案件数*班次数（列追加的形式），该格子外层格子ID（字符串，以:分割）】
+    文件名【320206_crimeData_20140101_20160601_glmST.csv】
+
+SEPP  
+训练输入数据：【日期（只记录有案发的日期，可非连续），格子ID，案件经度，案件纬度，该案件所在格子中心点经度，该案件所在格子中心点纬度，案件所属班次ID（默认无班次用0填充）】
+    文件名【320206_crimeData_20140101_20160601_SEPP.csv】
+预测输入数据：【格子ID，格子中心点经度，格子中心点纬度】
+    文件名【320206_crimeGrid_20140101_20160101_200_SEPP.csv】
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+参数配置文件中参数明细
+------------------------------------------------------------------------------------------
+tstat: train_config.json和predict_config.json
+
+train_config.json
+{"data_matrix": "E:/PPS/TrainDatas/208/tstat/208_crimeData_20141003_20160601_tstat.csv",
+ "pd_id": 208,
+ "start_date": 20150401,
+ "end_date": 20160401,
+ "sequence_range": 180
+}
+
+predict_config.json
+{"data_matrix": "E:/PPS/TrainDatas/208/tstat/208_crimeData_20141003_20160601_tstat.csv",
+ "pd_id": 208,
+ "start_date": 20160401,
+ "end_date": 20160601,
+ "combine": "FALSE"
+}
+
+SEPP: train_config.json和predict_config.json
+
+train_config.json
+{"data_matrix": "E:/PPS/TrainDatas/208/SEPP/208_crimeData_20150401_20160601_SEPP.csv",
+ "pd_id": 208,
+ "start_date": 20150401,
+ "end_date": 20160401,
+ "center": "TRUE",
+ "dist_range": 1,
+ "date_range": 150,
+ "nu_counts": 100,
+ "mu_counts": 15,
+ "g_counts": 15,
+ "iters": 50
+}
+
+predict_config.json
+{"data_matrix": "E:/PPS/TrainDatas/208/SEPP/208_crimeGrid_20150401_20160601_200_SEPP.csv",
+ "pd_id": 208,
+ "start_date": 20160401,
+ "end_date": 20160601
+}
+
+hmm: config.json
+
+config.json
+{"data_matrix": "E:/PPS/TrainDatas/208/tstat/208_crimeData_20141003_20160601_tstat.csv",
+ "pd_id": 208,
+ "start_date": 20160401,
+ "end_date": 20160601,
+ "hide_range": 200,
+ "observe_range": 180
+}
+
+glmST: config.json
+
+config.json
+{"data_matrix": "E:/PPS/TrainDatas/208/glmST/208_crimeData_20150401_20160601_glmST.csv",
+ "pd_id": 208,
+ "start_date": 20160401,
+ "end_date": 20160601,
+ "combine": "FALSE",
+ "burnin": 700,
+ "samples":800
+}
+
+---------------------------------------------------------------------------------------------
+
+执行脚本：例如tstat
+Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/tstat/train.R E:/WorkSpace/Eclipse/PPSModels/Results/tstat
+Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/tstat/predict.R E:/WorkSpace/Eclipse/PPSModels/Results/tstat
+# Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/tstat/temp_evaluate.R E:/PPS/TrainDatas/208/tstat/208_crimeData_20141003_20160601_tstat E:/WorkSpace/Eclipse/PPSModels/Results/tstat 208 10
+
+Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/SEPP/train.R E:/WorkSpace/Eclipse/PPSModels/Results/SEPP
+Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/SEPP/predict.R E:/WorkSpace/Eclipse/PPSModels/Results/SEPP
+# Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/SEPP/temp_evaluate.R E:/PPS/TrainDatas/208/SEPP/208_crimeData_20150401_20160601_SEPP E:/WorkSpace/Eclipse/PPSModels/Results/SEPP 208 10
+
+
+Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/hmm/hmm.R E:/WorkSpace/Eclipse/PPSModels/Results/hmm
+
+Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/glmST/glmST.R E:/WorkSpace/Eclipse/PPSModels/Results/glmST
+
+Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/knn/knn.R E:/WorkSpace/Eclipse/PPSModels/Results/knn
+
+Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/OptRank/rank_opt.R E:/WorkSpace/Eclipse/PPSModels/Results/OptRank
+
+输出样式
+--------------------------------------------------------------------------------------------------------------------------------------
+【glmST】无训练输出文件，只有预测输出文件
+无班次：noclass_208_glmST.csv --默认情况
+2班次：class_nocombine_1_208_glmST.csv class_nocombine_2_208_glmST.csv    --模型内部无合并计算
+       class_combine_1_208_glmST.csv class_combine_2_208_glmST.csv        --模型内部有合并计算
+3班次：class_nocombine_1_208_glmST.csv class_nocombine_2_208_glmST.csv class_nocombine_3_208_glmST.csv    --模型内部无合并计算
+       class_combine_1_208_glmST.csv class_combine_2_208_glmST.csv class_combine_3_208_glmST.csv          --模型内部有合并计算
+注：以上合并与否的结果是互斥的，在应用中只能同时存在一种情况 
+
+【hmm】无训练输出文件，只有预测输出文件
+无班次：noclass_208_hmm.csv
+2班次：class_nocombine_1_208_hmm.csv class_nocombine_2_208_hmm.csv
+3班次：class_nocombine_1_208_hmm.csv class_nocombine_2_208_hmm.csv class_nocombine_3_208_hmm.csv
+
+【SEPP】训练输出文件：208_SEPP.RData   
+无班次：noclass_208_SEPP.csv
+2班次：class_1_208_SEPP.csv class_2_208_SEPP.csv 
+3班次：class_1_208_SEPP.csv class_2_208_SEPP.csv class_3_208_SEPP.csv 
+  
+【tstat】训练输出文件：208_tstat.RData
+无班次：noclass_208_tstat.csv
+2班次：class_combine_1_208_tstat.csv class_combine_2_208_tstat.csv        --模型内部有合并计算
+       class_nocombine_1_208_tstat.csv class_nocombine_2_208_tstat.csv    --模型内部无合并计算
+3班次：class_combine_1_208_tstat.csv class_combine_2_208_tstat.csv class_combine_3_208_tstat.csv          --模型内部有合并计算
+       class_nocombine_1_208_tstat.csv class_nocombine_2_208_tstat.csv class_nocombine_2_208_tstat.csv    --模型内部无合并计算
+注：合并计算结果与不合并计算结果可以同时被保存下来（即，208_tstat.RData会存下合并与否的两种结果）
+
+【OptRank】无训练输出文件
+无班次：noclass_208_OptRank.csv
+2班次：class_1_208_OptRank.csv class_2_208_OptRank.csv 
+3班次：class_1_208_OptRank.csv class_2_208_OptRank.csv class_3_208_OptRank.csv 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/SEPP/temp_evaluate.R E:/PPS/TrainDatas/SEPP_DATA/30_for_train E:/WorkSpace/Eclipse/PPSModels/Results/SEPP 30 18
+
+  30:18
+  31:22
+  207:10
+  208:10
+  209:10
+  210:12
+  211:13
+  212:11
+  213:12
+  214:10
+  
+
+
+
+
+  

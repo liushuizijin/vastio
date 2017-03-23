@@ -1,0 +1,6 @@
+记住这两个网址：
+http://www.htmlwidgets.org/index.html
+
+https://www.rstudio.com/
+shiny和packages
+http://shiny.rstudio.com/tutorial/
