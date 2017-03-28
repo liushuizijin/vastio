@@ -1,4 +1,4 @@
-ÀýÈç£º
+ä¾‹å¦‚ï¼š
 Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/tstat/train.R E:/WorkSpace/Eclipse/PPSModels/Results/tstat
 Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/tstat/predict.R E:/WorkSpace/Eclipse/PPSModels/Results/tstat
 # Rscript E:/WorkSpace/Eclipse/PPSModels/Algorithm/tstat/temp_evaluate.R E:/PPS/TrainDatas/208/tstat/208_crimeData_20141003_20160601_tstat E:/WorkSpace/Eclipse/PPSModels/Results/tstat 208 10
